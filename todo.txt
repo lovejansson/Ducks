@@ -1,0 +1,31 @@
+- Eco sim text for testing
+
+Ett system som matas med datat för alla ankor och sedan körs uppdateringarna och efter knapp tryck så kan man se hur nästa generation är 
+
+Gather info
+
+- Document features of duck (size, color, speed, life span, where they live -> boil down to attributes that make up the duck object)
+- Document reproduction of ducks (number of eggs, when what how?) 
+- Evolution of the duck (gräsand)
+- Read about the algorithm in nature of code
+
+
+
+What they eat 
+
+They Eat water plants and small animals
+
+
+Attributes
+
+length (cm) 50-65 (body is 2/3 of this)
+wingspan (cm) 81-98 cm
+weight (kg) 0.7-1.6 kg
+length of bill (näbb) 4.4 to 6.1 cm
+
+
+Reproduction
+
+The female lays 8 to 13 on alternate days. 
+Incubation takes 27 to 28 days  (It takes this amount of time for the eggs to hatch), and fledging takes 50 to 60 days. (From hatching to when the ducklings have feathers so that they can fly)
+The ducklings are precocial and fully capable of swimming as soon as they hatch, so basically they can move and stuff when they hatch!
