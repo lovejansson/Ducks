@@ -1,0 +1,36 @@
+html {
+    font-size: 10px;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: black;
+}
+
+#canvas-container {
+    position: relative;
+    width: auto;
+    height: 100%;
+    aspect-ratio: 16/9;
+    margin: auto;
+}
+
+canvas {
+    position: absolute;
+    width: 100%;
+    image-rendering: pixelated;
+}
+
+

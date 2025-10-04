@@ -1,16 +1,20 @@
 
 import Play from "./Play.js";
+import Pause from "./Pause.js";
+import {Art} from "./pim-art/index.js";
+import {Debugger} from "./debugger.js";
 
-const play = new Play();
+export const debug = Debugger(true);
+
+const art = new Art({ 
+    pause: new Pause(),
+    play: new Play(),
+    width: 320,
+    height: 180,
+    tileSize: 16,
+    canvas: "#canvas-art",
+    displayGrid: true
+});
 
 
-function main() {
-    play.update();
-    play.draw();
-}
-
-const interval = setInterval(main, 100);
-
-setTimeout(() => {
-    clearInterval(interval);
-}, 1000 * 60 * 1);
+art.play();
