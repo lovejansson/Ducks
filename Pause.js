@@ -19,7 +19,7 @@ export default class Pause  extends Scene {
      * @param {CanvasRenderingContext2D} ctx 
      */
     draw(ctx) {
-        ctx.drawImage(this.art.images.get("background"), 0, 0, 320, 180);        
+        ctx.drawImage(this.art.images.get("background"), 0, 0, 640, 360);        
     }
     
 }

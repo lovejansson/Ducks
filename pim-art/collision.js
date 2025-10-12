@@ -28,11 +28,11 @@ function getCollision(obj1, obj2) {
     const box2YEnd = box2.y + box2.height;
 
     // If box1 is to the left, top, right or bottom of box2 but not touching, i.e. outside of the limit of box2, they are not colliding. 
-    const isColliding = !(box1XEnd < box2.x || box1YEnd < box2.y || box1.x > box2XEnd || box1.y > box2YEnd);
+    const isColliding = !(box1XEnd <= box2.x || box1YEnd <= box2.y || box1.x >= box2XEnd || box1.y >= box2YEnd);
 
 
     if (isColliding) {
-        // Calculate overlaps in Y and X direction and determine if it is a vertical collision and/or a horizontal collision
+        // Calculate overlaps in Y and X direction 
         const minYEnd = Math.min(box1YEnd, box2YEnd);
         const maxYStart = Math.max(box1.y, box2.y);
         const minXEnd = Math.min(box1XEnd, box2XEnd);
@@ -41,21 +41,100 @@ function getCollision(obj1, obj2) {
         const overlapY = minYEnd - maxYStart;
         const overlapX = minXEnd - maxXStart;
 
-        const isVerticalCollision = overlapX >= overlapY;
-        const isHorizontalCollision = overlapY >= overlapX;
-
         return {
             obj: obj2,
-            blocked: {
-                top: isVerticalCollision && box1.y > box2.y,
-                right: isHorizontalCollision && box1.x < box2.x,
-                bottom: isVerticalCollision && box1.y <= box2.y,
-                left: isHorizontalCollision && box1.x > box2.x
-            }
+            overlap: { x: overlapX, y: overlapY }
         };
     }
 
     return null;
 }
 
-export {getCollision}; 
+
+/**
+ * @typedef Polygon
+ * @property {Vertex[]} vertices
+ */
+
+/**
+ * @typedef Vertex
+ * @property {number} x 
+ * @property {number} y
+ */
+
+
+/**
+ * Computes the dot product between two vectors. 
+ * @param {{x: number, y: number}} v1 
+ * @param {{x: number, y: number}} v2 
+ * @returns 
+ */
+function dot(v1, v2) {
+    return v1.x * v2.x + v1.y * v2.y;
+}
+
+
+/**
+ * Checks if p1 is colliding with p2 using the Separating Axis Theorem (SAT) algorithm.
+ * Using the difference vector method, see https://www.youtube.com/watch?v=-EsWKT7Doww&t=1594s 
+ * 
+ * @param {Polygon} p1
+ * @param {Polygon} p2
+ */
+function isCollidingSAT(p1, p2) {
+
+
+    function getMinSeparation(p1, p2) {
+        let separation = -1000000000;
+
+        for (let i = 0; i < p1.vertices.length; ++i) {
+
+            let minSeparation = 1000000000;
+    
+            const v1 = p1.vertices[i];
+            const v2 = p1.vertices[(i + 1) % p1.vertices.length]; 
+    
+            const edge = { x: v2.x - v1.x, y: v2.y - v1.y };
+        
+            const normal = { x: edge.y, y: -edge.x }; 
+
+            const magnitude = Math.sqrt(normal.x * normal.x + normal.y * normal.y);
+
+            const normalizedNormal = { x: normal.x / magnitude, y: normal.y / magnitude };
+    
+            for (let j = 0; j < p2.vertices.length; ++j) {
+    
+                const v2b = p2.vertices[j];
+    
+                const diffVec = { x: v2b.x - v1.x, y: v2b.y - v1.y };
+    
+                minSeparation = Math.min(minSeparation, dot(diffVec, normalizedNormal))
+            }
+    
+            if(minSeparation > separation) {
+                separation = minSeparation;
+            }
+        }
+
+        return separation;
+    }
+    
+    return getMinSeparation(p1, p2) <= 0 && getMinSeparation(p2, p1) <= 0;
+}
+
+
+
+/**
+ * @param {number} x 
+ * @param {number} y 
+ * @param {number} width 
+ * @param {number} height
+ * @returns {Polygon} polygon
+ */
+function toPolygon(x, y, width, height) {
+    return {vertices: [{x, y}, {x: x + width, y}, {x: x + width, y: y + height}, 
+        {x, y: y + height}
+    ]};
+}
+
+export { isCollidingSAT,toPolygon, getCollision }; 

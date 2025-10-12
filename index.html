@@ -2,10 +2,26 @@
     <link rel="stylesheet" href="./index.css"></link>
     <script src="./index.js" type="module"></script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
     <body>
         <main id="canvas-container">
-            <canvas id="canvas-art" width="320" height="180"></canvas>
+            <canvas id="canvas-art" width="640" height="360"></canvas>
         </main>
+
+        <button id="btn-dev-info-open"><svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M3 3h2v18H3V3zm16 0H5v2h14v14H5v2h16V3h-2zm-8 6h2V7h-2v2zm2 8h-2v-6h2v6z" fill="currentColor"/> </svg></button>
+    <dialog id="dialog-dev-info" >
+        <h2>This project is in development!</h2>
+        <section>
+              <p>Use WASD or Arrow keys to control the duck.</p>
+                <p>It should currently only be able to walk and swim.</p>
+                <p>Click the screen to start</p>
+        </section>
+
+        <button autofocus id="btn-dev-info-close">Ok!</button>
+        </dialog>
     </body>
     
 </html>

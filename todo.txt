@@ -9,19 +9,23 @@ Implementing lifecycle states
 Art
 
 Eggs
-a Nest 
+
+a Nest
+
 Ducks ducking in water
-Duck sleeping
-Overlay for shadows and water ripples
+
+Overlay for shadows
+
+Overlay for water ripples
 
 Ref TODO
 
+Hade varit najs om man kunde implementera action states steg vis och ha det live så att en användare potentiellt ska kunna testa och under utveckling för att testa states 
 Hade varit as najs med en tilemap editor för att markera vad olika areas är för något än att göra det manuellt.
 
-Hade varit najs om man kunde implementera action states steg vis och ha det live. 
 
-Så en komponent där man kan markera vilken sprite som ska vara aktiv 
-Info om vilka keys som rör den info om hur den kan ät
+TODO TODAY
 
-a list of states to toggle between
-Just as a fun thing for user to interact with in development
+Sjökant 
+vass
+
