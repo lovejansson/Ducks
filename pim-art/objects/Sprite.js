@@ -14,23 +14,20 @@ export default class Sprite extends ArtObject {
      * @param {{ x: number, y: number }} pos
      * @param {number} width
      * @param {number} height
-     * @param {string | undefined} image 
+     * @param {"n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw"} direction
      */
-    constructor(scene, id, pos, width, height, image = undefined) {
+    constructor(scene, id, pos, width, height, direction) {
         super(scene, id);
         this.pos = pos;
         this.width = width;
         this.height = height;
+        this.direction = direction;
         this.halfWidth = width / 2;
         this.halfHeight = height / 2;
         this.animations = new AnimationManager(this);
-        this.image = image;
     }
 
-    /**
-     * @param {import("../collision.js").CollisionResult[]} collisions 
-     */
-    update(collisions) {
+    update() {
         throw new NotImplementedError("Sprite", "update");
     }
 
@@ -38,13 +35,8 @@ export default class Sprite extends ArtObject {
      * @param {CanvasRenderingContext2D} ctx 
      */
     draw(ctx) {
-        // Draw static image for sprite
-        if(this.image) {
-            ctx.drawImage(this.scene.art.images.get(this.image), this.pos.x, this.pos.y);
-        } else {
-            // Draw animation for sprite
-            this.animations.draw(ctx, this.pos);
-        }
+        // Draw animation for sprite
+        this.animations.draw(ctx, this.pos);
     }
 }
 

@@ -1,12 +1,19 @@
 Code
 
-Implementing action states
-     sleeping/resting,
-    swimming, eating ground
+Implement eating grass/ducking for food, sleeping, just standing still, randomly apply these states 
 
-Implementing lifecycle states 
+Simulate health of the birds which controls when the go into feed state
+
+Simulate flocking of some of the ducks
+
+Simualte reproduction 
+
 
 Art
+
+Sjökant 
+
+vass
 
 Eggs
 
@@ -24,8 +31,4 @@ Hade varit najs om man kunde implementera action states steg vis och ha det live
 Hade varit as najs med en tilemap editor för att markera vad olika areas är för något än att göra det manuellt.
 
 
-TODO TODAY
-
-Sjökant 
-vass
-
+ 

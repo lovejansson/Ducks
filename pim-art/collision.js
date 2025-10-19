@@ -32,18 +32,29 @@ function getCollision(obj1, obj2) {
 
 
     if (isColliding) {
-        // Calculate overlaps in Y and X direction 
-        const minYEnd = Math.min(box1YEnd, box2YEnd);
-        const maxYStart = Math.max(box1.y, box2.y);
-        const minXEnd = Math.min(box1XEnd, box2XEnd);
-        const maxXStart = Math.max(box1.x, box2.x);
+        // Seen from box 1's sides, so if box 2 sits on top of box 1 this is box1 beeing blocked to the top
+        const overlapRight = box1XEnd - box2.x;
+        const overlapLeft = box2XEnd - box1.x;
+        const overlapTop = box2YEnd - box1.y;
+        const overlapBottom =  box1YEnd - box2.y;
 
-        const overlapY = minYEnd - maxYStart;
-        const overlapX = minXEnd - maxXStart;
+        // Find the minimum overlap
+        const minOverlap = Math.min(overlapLeft, overlapRight, overlapTop, overlapBottom);
+
+        let blocked = { top: false, right: false, bottom: false, left: false };
+
+        if (minOverlap === overlapRight) blocked.right = true;
+        else if (minOverlap === overlapLeft) blocked.left = true;
+        else if (minOverlap === overlapBottom) blocked.bottom = true;
+        else if (minOverlap === overlapTop) blocked.top = true;
 
         return {
             obj: obj2,
-            overlap: { x: overlapX, y: overlapY }
+            blocked,
+            overlap: {
+                x: Math.min(overlapLeft, overlapRight),
+                y: Math.min(overlapTop, overlapBottom)
+            }
         };
     }
 
